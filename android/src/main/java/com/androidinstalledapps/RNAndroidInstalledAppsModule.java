@@ -75,6 +75,22 @@ public class RNAndroidInstalledAppsModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
+  public void getAppsPackageNames(Promise promise) {
+    try {
+      PackageManager pm = this.reactContext.getPackageManager();
+      List<PackageInfo> pList = pm.getInstalledPackages(0);
+      WritableArray list = Arguments.createArray();
+      for (int i = 0; i < pList.size(); i++) {
+        PackageInfo packageInfo = pList.get(i);
+        list.pushString(packageInfo.packageName);
+      }
+      promise.resolve(list);
+    } catch (Exception ex) {
+      promise.reject(ex);
+    }
+  }
+
+  @ReactMethod
   public void getNonSystemApps(Promise promise) {
     try {
       PackageManager pm = this.reactContext.getPackageManager();

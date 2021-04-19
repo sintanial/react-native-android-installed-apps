@@ -9,6 +9,9 @@ module.exports = {
   getApps(): Promise<any> {
     return RNAndroidInstalledApps.getApps();
   },
+  getAppsPackageNames(): Promise<string[]> {
+    return RNAndroidInstalledApps.getAppsPackageNames();
+  },
   getNonSystemApps(): Promise<any> {
     return RNAndroidInstalledApps.getNonSystemApps();
   },
